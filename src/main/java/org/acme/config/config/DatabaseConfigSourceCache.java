@@ -20,6 +20,7 @@ public class DatabaseConfigSourceCache {
     public DatabaseConfigSourceCache () throws SQLException {
         if (cacheProperties == null) {
             getAllProperties();
+            lastChanges = LocalDateTime.now();
         }
     }
 
@@ -146,7 +147,7 @@ public class DatabaseConfigSourceCache {
         Update lastChanges
      */
     void compareLastChanges(String newValue) {
-        if (lastChanges == null || lastChanges.isBefore(LocalDateTime.parse(newValue)))  {
+        if (lastChanges != null && lastChanges.isBefore(LocalDateTime.parse(newValue)))  {
             lastChanges = LocalDateTime.parse(newValue);
             System.out.println("=== *** lastChanges.changeTo: " + lastChanges);
         }
@@ -156,7 +157,7 @@ public class DatabaseConfigSourceCache {
         Connection conn = null;
         try {
             Properties props = new Properties();
-            props.setProperty("user", "user");
+            props.setProperty("user", "username");
             props.setProperty("password", "password");
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 

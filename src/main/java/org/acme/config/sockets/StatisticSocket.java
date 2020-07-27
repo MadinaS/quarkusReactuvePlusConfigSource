@@ -70,7 +70,7 @@ public class StatisticSocket {
 
     //ToDo
     @OnError
-    public void onError(Session session, @PathParam("chatKey") String chatKey) {
+    public void onError(Session session, Throwable throwable, @PathParam("chatKey") String chatKey) {
 //        sessions.remove(username);
 //        broadcast("User " + username + " left on error: " + throwable);
     }
